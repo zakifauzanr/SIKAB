@@ -1,6 +1,16 @@
-import PetaBurung from "../data/Peta";
+import { useEffect, useState } from "react";
+import Axios from 'axios';
 
 function Peta(){
+    useEffect(() => {
+        getGaleri();
+        window.scrollTo(0, 0);
+      }, []); 
+    const [getKonten,setKonten]= useState([]);
+    const getGaleri = async () => {
+        const response = await Axios.get("http://localhost:8000/api/getPeta");
+        setKonten(response.data);
+      };
     return(
         <div className="my-20 text-left">
             <h1 className="text-3xl font-bold text-left">Jelajahi Sebaran Burung di Kalimantan <br/> Dengan Peta Interaktif <br/> Keanekaragaman Hayati Burung</h1>
@@ -9,17 +19,17 @@ function Peta(){
                 <button className='px-5 py-1 button-search text-white'>Cari</button>
             </div>
             <div className="my-12">
-                {PetaBurung.map((item,idx)=>(
-                    <div className="flex justify-between w-full mb-5" key={idx}>
+                {getKonten.map((item,idx)=>(
+                    <div className="flex justify-between w-full mb-12" key={idx}>
                         <div className="flex flex-col justify-between">
                             <div>
                                 <h3 className="text-md font-semibold">{item.lokasi}</h3>
-                                <h2 className="text-3xl font-bold my-3">{item.namaTempat}</h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus aperiam deleniti nihil dicta veritatis eveniet eum odit rerum pariatur. Eligendi iste nostrum facilis placeat aliquid aliquam atque ullam veniam voluptate, saepe tenetur asperiores ipsa, provident vero? Magnam harum recusandae odit perspiciatis nemo, minus quos tempora illum, modi soluta rerum earum reiciendis deserunt facere ipsum et voluptas! Neque explicabo rem iste aliquam, earum culpa quas iusto harum, error ipsum corrupti est.</p>
+                                <h2 className="text-3xl font-bold mb-3">{item.nama_Tempat}</h2>
+                                <p>{item.deskripsi}</p>
                             </div>
                             <button className='bg-green-900 w-fit px-4 py-1 rounded-md text-white'>Lihat</button>
                         </div>
-                        <img className="w-96 ml-40" src={item.img} alt="" />
+                        <img className="w-96 ml-40" src={`/peta/${item.gambar}`} alt="" />
                     </div>
                 ))}
             </div>

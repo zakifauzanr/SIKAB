@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import sikab from '../../assets/sikab2.png'
 import { Link, useNavigate } from 'react-router-dom';
-import { Link as Linkdom } from 'react-scroll';
 import Swal from 'sweetalert2';
 
 function Header() {
@@ -82,17 +81,13 @@ function Header() {
           >
             Peta Burung
           </Link>
-          <Linkdom
+          <Link
             href='#'
-            to="About"
-            spy={true}
-            smooth={true}
-            offset={-100}
-            duration={500}
+            to="/berita"
             className="block lg:inline-block text-black hover:text-gray-400"
           >
             Berita
-          </Linkdom>
+          </Link>
           {/* <div
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
