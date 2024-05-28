@@ -68,28 +68,20 @@ function Header() {
         </div>
         <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 md:ml-5 lg:ml-5 mt-4 sm:mt-0 lg:block ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
           <div className='h-full w-full bg- inline-block mt-2 flex justify-around px-72'>
-          <Linkdom
+          <Link
             href='#'
-            to="/"
-            spy={true}
-            smooth={true}
-            offset={-100}
-            duration={500}
+            to="/katalog"
             className="block lg:inline-block text-black hover:text-gray-400"
           >
             Katalog
-          </Linkdom>
-          <Linkdom
+          </Link>
+          <Link
             href='#'
-            to="About"
-            spy={true}
-            smooth={true}
-            offset={-100}
-            duration={500}
+            to="/peta"
             className="block lg:inline-block text-black hover:text-gray-400"
           >
             Peta Burung
-          </Linkdom>
+          </Link>
           <Linkdom
             href='#'
             to="About"

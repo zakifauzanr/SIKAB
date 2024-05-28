@@ -7,7 +7,7 @@ function Home(){
     return(
         <div>
             <div className="h-screen">
-            <div className="container-home my-3 mx-16 px-10 rounded-2xl bg-home flex justify-center items-center">
+            <div className="container-home my-3 px-10 rounded-2xl bg-home flex justify-center items-center">
                 <div className='text-white'>
                     <h1>Mari Bergabung Melestarikan</h1>
                     <div className='flex justify-center'>
