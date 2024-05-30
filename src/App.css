@@ -52,3 +52,7 @@
 .card-bird{
   height: 75vh;
 }
+.map-container{
+  height: 75vh;
+  width: 100%;
+}

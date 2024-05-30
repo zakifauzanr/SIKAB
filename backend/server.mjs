@@ -82,10 +82,37 @@ server.get('/api/berita', (req, res) => {
   });
 });
 
-server.get('/api/detail/:ID_Burung', (req, res) => {
+server.get('/api/detail_burung/:ID_Burung', (req, res) => {
   const { ID_Burung } = req.params;
   const sqlSelect = "SELECT * FROM burung WHERE ID_Burung = ?";
   const values = [ID_Burung];
+  db.query(sqlSelect, values, (err, result) => {
+      res.send(result);
+  });
+});
+
+server.get('/api/detail_berita/:ID_Berita', (req, res) => {
+  const { ID_Berita } = req.params;
+  const sqlSelect = "SELECT * FROM berita WHERE ID_Berita = ?";
+  const values = [ID_Berita];
+  db.query(sqlSelect, values, (err, result) => {
+      res.send(result);
+  });
+});
+
+server.get('/api/detail_peta/:ID_Tempat', (req, res) => {
+  const { ID_Tempat } = req.params;
+  const sqlSelect = "SELECT * FROM habitat WHERE ID_Tempat = ?";
+  const values = [ID_Tempat];
+  db.query(sqlSelect, values, (err, result) => {
+      res.send(result);
+  });
+});
+
+server.get('/api/peta_burung/:ID_Tempat', (req, res) => {
+  const { ID_Tempat } = req.params;
+  const sqlSelect = "SELECT nama_Burung FROM burung WHERE ID_Tempat = ?";
+  const values = [ID_Tempat];
   db.query(sqlSelect, values, (err, result) => {
       res.send(result);
   });
