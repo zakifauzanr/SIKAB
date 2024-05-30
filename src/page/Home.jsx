@@ -8,7 +8,10 @@ function Home(){
         <div>
             <div className="h-screen">
             <div className="relative container-home my-3 px-10 rounded-2xl bg-home flex justify-center items-center">
-                <div className='text-white'>
+                <div className='absolute left-0 bottom-0 z-0'>
+                    <img width={500} src={bgHome} alt="" />
+                </div>
+                <div className='relative text-white z-10'>
                     <h1>Mari Bergabung Melestarikan</h1>
                     <div className='flex justify-center'>
                         <img width={700} src={title} alt="" />
@@ -18,9 +21,6 @@ function Home(){
                         <input value='Masukkan Nama/Jenis burung yang ingin kamu cari' type="text" className='py-1 mr-3 pl-1 w-96 text-slate-400'/>
                         <button className='px-5 py-1 button-search'>Cari</button>
                     </div>
-                </div>
-                <div className='absolute left-0 bottom-0'>
-                    <img width={500} src={bgHome} alt="" />
                 </div>
             </div>
             </div>

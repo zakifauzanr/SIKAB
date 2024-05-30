@@ -9,6 +9,9 @@ import Peta from './page/Peta';
 import Berita from './page/Berita';
 import Detail_Galeri from './page/Detail_Galeri';
 import { AuthProvider } from './context/AuthContext';
+import Detail_Galeri from './page/detail/Detail_Galeri'
+import Detail_Peta from './page/detail/Detail_Peta'
+import Detail_Berita from './page/detail/Detail_Berita'
 
 function App() {
   return (
@@ -17,12 +20,14 @@ function App() {
         {/* <Header /> */}
         <div className=''>
           <Routes>
-            <Route exact path='/login' element={<Login />} />
             <Route exact path='/' element={<Home />} />
+            <Route exact path='/login' element={<Login />} />
             <Route exact path='/katalog' element={<Katalog />} />
             <Route exact path='/peta' element={<Peta />} />
             <Route exact path='/berita' element={<Berita />} />s
             <Route path='/galeri/:id' element={<Detail_Galeri />} />
+            <Route path='/peta/detail/:id' element={<Detail_Peta/>}/>
+            <Route path='/berita/detail/:id' element={<Detail_Berita/>}/>
           </Routes>
         </div>
         {/* <Footers /> */}

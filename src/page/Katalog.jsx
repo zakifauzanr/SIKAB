@@ -14,7 +14,7 @@ function Katalog(){
       };
     return(
         <div className="my-20 text-left">
-            <h1 className="text-3xl font-bold text-left">Jelajahi Keanekaragaman Hayati <br/> Burung yang Menakjubkan</h1>
+            <h1 className="text-5xl font-bold text-left">Jelajahi Keanekaragaman Hayati <br/> Burung yang Menakjubkan</h1>
             <div className='mt-12'>
                 <input value='Masukkan Nama/Jenis burung yang ingin kamu cari' type="text" className='border border-md border-black py-1 mr-3 pl-1 w-96 text-slate-400'/>
                 <button className='px-5 py-1 button-search text-white'>Cari</button>

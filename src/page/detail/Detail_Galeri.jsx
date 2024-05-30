@@ -11,7 +11,7 @@ function Detail_Galeri(){
       setGaleri(response.data);
     };
     const getBurung = async () => {
-        const response = await Axios.get(`http://localhost:8000/api/detail/${id}`);
+        const response = await Axios.get(`http://localhost:8000/api/detail_burung/${id}`);
         setKonten(response.data);
       };
     useEffect(() => {
