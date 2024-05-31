@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
 import bgHome from '../assets/bird.png';
 import title from '../assets/TitleHome.png';
 import Items from '../component/organism/Items';
 import Sharing from '../component/organism/Sharing';
 
 function Home(){
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []); 
     return(
         <div>
             <div className="h-screen">

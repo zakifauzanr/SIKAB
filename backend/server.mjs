@@ -4,6 +4,7 @@ import mysql from 'mysql';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import multer from 'multer';
+import jwt from 'jsonwebtoken';
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -79,6 +80,25 @@ server.get('/api/berita', (req, res) => {
   const sqlSelect = "SELECT * FROM berita";
   db.query(sqlSelect, (err, result) => {
       res.send(result);
+  });
+});
+
+server.post('/api/getAcc', (req, res) => {
+  const { username, password } = req.body;
+  const sqlSelect = "SELECT * FROM user WHERE Username = ? AND Password = ?";
+  db.query(sqlSelect, [username, password], (err, result) => {
+    if (err) {
+      res.status(500).send('Server error');
+      return;
+    }
+
+    if (result.length > 0) {
+      const user = result[0];
+      const token = jwt.sign({ username: user.Username }, 'sikab2024', { expiresIn: '1h' });
+      res.json({ token });
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
   });
 });
 
