@@ -9,21 +9,21 @@ import { jwtDecode } from "jwt-decode";
 function Login() {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-  const [username, setusername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLoginClick = async () => {
-    if (!username || !password) {
-      setError("username dan password tidak boleh kosong");
+    if (!email || !password) {
+      setError("Email dan Password tidak boleh kosong");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/getAcc", { username, password });
+      const response = await axios.post("http://localhost:8000/api/getAcc", { email, password });
       const { token } = response.data;
       const decoded = jwtDecode(token);
-      const user = { username: decoded.username };
+      const user = { email: decoded.email };
 
       const expirationTime = new Date(decoded.exp * 1000);
       localStorage.setItem("token", token);
@@ -74,20 +74,20 @@ function Login() {
   return (
     <div className="flex">
       <div className="login h-screen w-[100vw] lg:w-[50vw] flex flex-col justify-center">
-        <div className="text-center text-violet-950 text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
+        <div className="text-center text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
           MASUK
         </div>
-        <p className="text-violet-950 text-[16px] lg:text-[20px] xl:text-base font-normal mb-4">
-          Silahkan masukan username dan kata sandi kamu ya!
+        <p className="text-[16px] lg:text-[20px] xl:text-base font-normal mb-4">
+          Silahkan masukan email dan kata sandi kamu ya!
         </p>
         <div className="flex flex-col gap-4 lg:gap-6 xl:gap-8 items-center">
           <input
             className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
-            type="username"
-            placeholder="username"
-            value={username}
+            type="email"
+            placeholder="Email"
+            value={email}
             onChange={(e) => {
-              setusername(e.target.value);
+              setEmail(e.target.value);
               setError("");
             }}
           />
@@ -108,7 +108,7 @@ function Login() {
             Forgot Password?
           </a>
           <button
-            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] bg-violet-950 rounded-[5px] text-[12px] lg:text-[16px] xl:text-base text-white"
+            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] bg-[#294122] rounded-[5px] text-[12px] lg:text-[16px] xl:text-base text-white"
             onClick={handleLoginClick}
           >
             Login
@@ -121,7 +121,7 @@ function Login() {
             <p className="text-red-500 text-[12px] lg:text-[16px]">{error}</p>
           )}
           <p className="text-[12px] lg:text-[16px] xl:text-base font-normal">
-            Dont have an account?{" "}
+            Don't have an account?{" "}
             <Link
               to="/register"
               className="text-violet-950 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
