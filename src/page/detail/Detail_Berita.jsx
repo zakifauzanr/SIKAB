@@ -45,13 +45,36 @@ function Detail_Berita(){
         }
     };
     const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('id-ID', options);
-      };
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('id-ID', options);
+    };
+    const [subscriptionMessage, setSubscriptionMessage] = useState('');
+
+    const handleSubscription = async () => {
+        try {
+            const email = localStorage.getItem('email'); // Ambil email dari localStorage
+            console.log(email);
+            if (!email) {
+                setSubscriptionMessage('Anda harus login terlebih dahulu.');
+                return;
+            }
+
+            const response = await Axios.post('http://localhost:8000/api/send-update-email', { email });
+
+            if (response.status === 200) {
+                setSubscriptionMessage('Email berhasil dikirim!');
+            } else {
+                setSubscriptionMessage('Gagal mengirim email.');
+            }
+        } catch (error) {
+            console.error('Error subscribing:', error);
+            setSubscriptionMessage('Gagal mengirim emailss.');
+        }
+    };
     return(
         <div className="my-12">
             <div className="text-left my-3">
-                <Link to='/berita'><FontAwesomeIcon icon={faAngleLeft}/> Semua Peta</Link>
+                <Link to='/berita'><FontAwesomeIcon icon={faAngleLeft}/> Semua Berita</Link>
             </div>
             {getKonten.map((item,idx)=>(
                 <div key={idx} className="flex flex-col justify-between">
@@ -77,8 +100,8 @@ function Detail_Berita(){
                         <div className="p-7 m-12 border border-black border-md text-left">
                             <h1 className="text-xl font-bold">Langganan Untuk Selalu Update</h1>
                             <p className="my-5">Berlangganan untuk menerima berita terbaru tentang kenaekaragaman hayati burung di kalimantan ke kotak masuk Anda setiap minggu.</p>
-                            <input className="border border-black border-md w-full mb-2 px-2" type="email" value="Masukkan Email"/>
-                            <button className="w-full bg-green-800 text-white py-1">Submit</button>
+                            <button className="w-full bg-green-800 text-white py-1" onClick={handleSubscription}>Berlangganan</button>
+                            <p className="font-base text-sm">{subscriptionMessage}</p>
                         </div>
                     </div>
                     <div className="text-left my-12">

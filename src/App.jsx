@@ -18,7 +18,7 @@ import Search from './page/Search';
 function App() {
   const isLoggedIn = localStorage.getItem("token") !== null;
   const location = useLocation();
-  const isLoginOrRegister = location.pathname === '/Login' || location.pathname === '/register';
+  const isLoginOrRegister = location.pathname === '/Login' || location.pathname === '/register' || location.pathname === '/login';
 
   return (
     <AuthProvider>
@@ -33,16 +33,19 @@ function App() {
             <Route path='/peta' element={<Peta />} />
             <Route path='/berita' element={<Berita />} />
             <Route path='/search' element={<Search />} />
-            <Route path='/galeri/:id' element={<Detail_Galeri/>} />
-            <Route path='/peta/detail/:id' element={<Detail_Peta/>}/>
-            <Route path='/berita/detail/:id' element={<Detail_Berita/>}/>
             {isLoggedIn?(
               <>
                 <Route path='/login' element={<Navigate to='/'/>} />
                 <Route exact path='/register' element={<Navigate to='/'/>} />
+                <Route path='/galeri/:id' element={<Detail_Galeri/>} />
+                <Route path='/peta/detail/:id' element={<Detail_Peta/>}/>
+                <Route path='/berita/detail/:id' element={<Detail_Berita/>}/>
               </>
             ):(
               <>
+                <Route path='/galeri/:id' element={<Navigate to='/login'/>} />
+                <Route path='/peta/detail/:id' element={<Navigate to='/login'/>}/>
+                <Route path='/berita/detail/:id' element={<Navigate to='/login'/>}/>
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/register' element={<Register />} />
               </>

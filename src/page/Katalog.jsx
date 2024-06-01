@@ -1,12 +1,33 @@
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Katalog(){
     useEffect(() => {
         getGaleri();
         window.scrollTo(0, 0);
       }, []); 
+
+      const [searchTerm, setSearchTerm] = useState('');
+      const navigate = useNavigate();
+      
+      const handleInputChange = (e) => {
+          setSearchTerm(e.target.value);
+      };
+  
+      const handleSearch = async () => {
+          try {
+              const response = await axios.get('http://localhost:8000/api/search/burung', {
+                  params: {
+                      keyword: searchTerm
+                  }
+              });
+              navigate('/search', { state: { results: response.data } });
+          } catch (error) {
+              console.error("Error!", error);
+          }
+      };
     const [getKonten,setKonten]= useState([]);
     const getGaleri = async () => {
         const response = await Axios.get("http://localhost:8000/api/get");
@@ -16,8 +37,8 @@ function Katalog(){
         <div className="my-20 text-left">
             <h1 className="text-5xl font-bold text-left">Jelajahi Keanekaragaman Hayati <br/> Burung yang Menakjubkan</h1>
             <div className='mt-12'>
-                <input value='Masukkan Nama/Jenis burung yang ingin kamu cari' type="text" className='border border-md border-black py-1 mr-3 pl-1 w-96 text-slate-400'/>
-                <button className='px-5 py-1 button-search text-white'>Cari</button>
+                <input placeholder='Masukkan Nama/Jenis burung yang ingin kamu cari' onChange={handleInputChange} value={searchTerm} type="text" className='border border-md border-black py-1 mr-3 pl-1 w-96 text-slate-400'/>
+                <button  onClick={handleSearch}  className='px-5 py-1 button-search text-white'>Cari</button>
             </div>
             <div className="grid grid-cols-4 gap-6 my-8 text-left">
                 {getKonten.map((item,idx)=>(

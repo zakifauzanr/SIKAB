@@ -29,6 +29,7 @@ function Login() {
 
       const expirationTime = new Date(decoded.exp * 1);
       localStorage.setItem("token", token);
+      localStorage.setItem("email", email);
       localStorage.setItem("expirationTime", expirationTime);
 
       login(user);

@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -13,6 +14,38 @@ const db = mysql.createConnection({
     password: '',
     database: 'sikab'
 });
+
+// Konfigurasi transporter untuk mengirim email
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      type: 'OAuth2',
+      user: 'sikabkaltim@gmail.com',
+      clientId: '22130485475-ljmmeog4tp678hv9kekqr27fh6dohmko.apps.googleusercontent.com',
+      clientSecret: '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',
+      refreshToken: '1//04QjvgRLZQ7L1CgYIARAAGAQSNwF-L9IriyWs0fBtFbaCibw6xxkyv257zf-nvrcOseVDcYPFENHF42O7RTdUACxnu6mP6LlTcdI',
+    },
+});
+
+// Fungsi untuk mengirim email berisi update berita
+const sendEmailUpdate = async (email) => {
+  try {
+      // Options email
+      const mailOptions = {
+          from: 'sikabkaltim@gmail.com',
+          to: email,
+          subject: 'Update Berita Terbaru',
+          text: 'Terima kasih telah berlangganan. Kami senang dapat memberitahu Anda tentang berita terbaru yang baru saja kami terbitkan.'
+      };
+
+      // Mengirim email
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email sent:', info.response);
+  } catch (error) {
+      console.error('Error sending email:', error);
+  }
+};
+
 
 const server = express();
 server.use(cors());
@@ -62,6 +95,27 @@ server.post('/api/insert', upload.single('Gambar'), (req, res) => {
   })
 });
 
+// Endpoint untuk mengirim email berisi update berita kepada pengguna yang telah login
+server.post('/api/send-update-email', async (req, res) => {
+  const { email } = req.body;
+  console.log(email);
+
+  if (!email) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  // Dapatkan alamat email pengguna yang telah login
+  try {
+    // Kirim email berisi update berita kepada pengguna
+    await sendEmailUpdate(email);
+    res.status(200).json({ message: 'Email update sent successfully' });
+  } catch (error) {
+    console.error('Error sending update email:', error);
+    res.status(500).send('Failed to send update email');
+  }
+});
+
+
 server.get('/api/get', (req, res) => {
     const sqlSelect = "SELECT * FROM burung";
     db.query(sqlSelect, (err, result) => {
@@ -83,12 +137,40 @@ server.get('/api/berita', (req, res) => {
   });
 });
 
-server.get('/api/search', (req, res) => {
+server.get('/api/search/tempat', (req, res) => {
+  const searchKeyword = req.query.keyword;
+  if (!searchKeyword) {
+      return res.status(400).send({ error: 'Keyword is required' });
+  }
+  const sqlSelect = "SELECT * FROM habitat WHERE nama_Tempat REGEXP ?";
+  db.query(sqlSelect, [searchKeyword], (err, result) => {
+      if (err) {
+          return res.status(500).send(err);
+      }
+      res.send(result);
+  });
+});
+
+server.get('/api/search/berita', (req, res) => {
   const searchKeyword = req.query.keyword;
   if (!searchKeyword) {
       return res.status(400).send({ error: 'Keyword is required' });
   }
   const sqlSelect = "SELECT * FROM berita WHERE Judul REGEXP ?";
+  db.query(sqlSelect, [searchKeyword], (err, result) => {
+      if (err) {
+          return res.status(500).send(err);
+      }
+      res.send(result);
+  });
+});
+
+server.get('/api/search/burung', (req, res) => {
+  const searchKeyword = req.query.keyword;
+  if (!searchKeyword) {
+      return res.status(400).send({ error: 'Keyword is required' });
+  }
+  const sqlSelect = "SELECT * FROM burung WHERE nama_Burung REGEXP ?";
   db.query(sqlSelect, [searchKeyword], (err, result) => {
       if (err) {
           return res.status(500).send(err);
@@ -109,7 +191,6 @@ server.post('/api/getAcc', (req, res) => {
 
     if (result.length > 0) {
       const user = result[0];
-
       // Memeriksa kecocokan password
       try {
         const match = await bcrypt.compare(password, user.Password);
@@ -197,19 +278,6 @@ server.get('/api/galeri/:ID_Burung', (req, res) => {
   });
 });
 
-server.post('/api/auth', (req, res) => {
-  const { userId, userToken } = req.body;
-  authDataMap.set(userToken,{ userId, userToken });
-  console.log('login auth',authDataMap);
-  const responseData = {
-    status: 'success',
-    message: 'Autentikasi berhasil!',
-    userId: userId,
-    userToken:userToken
-  };
-  res.json(responseData);
-});
-
 server.post('/api/register', async (req, res) => {
   const { email, password, nama } = req.body;
 
@@ -220,7 +288,7 @@ server.post('/api/register', async (req, res) => {
   const sqlInsert = 'INSERT INTO user (Email, Password, name_Author) VALUES (?, ?, ?)';
   const values = [email, hashedPassword, nama];
 
-  db.query(sqlInsert, values, (err, result) => {
+  db.query(sqlInsert, values, (err) => {
     if (err) {
       console.error('Error = ', err);
       res.status(500).send('Gagal menyimpan data.');

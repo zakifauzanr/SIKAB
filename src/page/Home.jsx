@@ -6,21 +6,21 @@ import Items from '../component/organism/Items';
 import Sharing from '../component/organism/Sharing';
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate();
-
+function Home() {   
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
+    
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
+    
     const handleInputChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/search', {
+            const response = await axios.get('http://localhost:8000/api/search/berita', {
                 params: {
                     keyword: searchTerm
                 }
