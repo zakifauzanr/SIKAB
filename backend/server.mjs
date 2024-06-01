@@ -83,6 +83,20 @@ server.get('/api/berita', (req, res) => {
   });
 });
 
+server.get('/api/search', (req, res) => {
+  const searchKeyword = req.query.keyword;
+  if (!searchKeyword) {
+      return res.status(400).send({ error: 'Keyword is required' });
+  }
+  const sqlSelect = "SELECT * FROM berita WHERE Judul REGEXP ?";
+  db.query(sqlSelect, [searchKeyword], (err, result) => {
+      if (err) {
+          return res.status(500).send(err);
+      }
+      res.send(result);
+  });
+});
+
 server.post('/api/getAcc', (req, res) => {
   const { username, password } = req.body;
   const sqlSelect = "SELECT * FROM user WHERE Username = ? AND Password = ?";

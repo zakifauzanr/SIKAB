@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import loginImage from "../assets/login.png";
+import sikab from "../assets/sikab2.png";
+import masuk from '../assets/login/Masuk.png';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
@@ -25,7 +27,7 @@ function Login() {
       const decoded = jwtDecode(token);
       const user = { username: decoded.username };
 
-      const expirationTime = new Date(decoded.exp * 1000);
+      const expirationTime = new Date(decoded.exp * 1);
       localStorage.setItem("token", token);
       localStorage.setItem("expirationTime", expirationTime);
 
@@ -73,16 +75,19 @@ function Login() {
 
   return (
     <div className="flex">
-      <div className="login h-screen w-[100vw] lg:w-[50vw] flex flex-col justify-center">
-        <div className="text-center text-violet-950 text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
-          MASUK
+      <div className="login h-full w-[100vw] lg:w-[50vw] flex flex-col justify-start py-5">
+        <Link to='/'>
+          <img className="w-24 ml-5" src={sikab} alt="" />
+        </Link>
+        <div className="flex pt-16 justify-center text-center text-violet-950 text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
+          <img className="w-32" src={masuk} alt="" />
         </div>
         <p className="text-violet-950 text-[16px] lg:text-[20px] xl:text-base font-normal mb-4">
           Silahkan masukan username dan kata sandi kamu ya!
         </p>
-        <div className="flex flex-col gap-4 lg:gap-6 xl:gap-8 items-center">
+        <div className="flex flex-col gap-4 lg:gap-6 xl:gap-4 items-center">
           <input
-            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
+            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[40px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
             type="username"
             placeholder="username"
             value={username}
@@ -92,7 +97,7 @@ function Login() {
             }}
           />
           <input
-            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
+            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[40px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
             type="password"
             placeholder="Password"
             value={password}
@@ -101,32 +106,31 @@ function Login() {
               setError("");
             }}
           />
-          <a
-            href="forget-password"
-            className="text-violet-950 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
-          >
-            Forgot Password?
-          </a>
-          <button
-            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] bg-violet-950 rounded-[5px] text-[12px] lg:text-[16px] xl:text-base text-white"
-            onClick={handleLoginClick}
-          >
-            Login
-          </button>
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-          />
+          <div className="my-3 flex flex-col items-center">
+            <button
+              className="mb-3 w-[260px] h-[40px] lg:w-[408px] lg:h-[40px] bg-green-900 rounded-[5px] text-[12px] lg:text-[16px] xl:text-base text-white"
+              onClick={handleLoginClick}
+            >
+              Masuk
+            </button>
+            <GoogleLogin
+              shape="rectangular"
+              width={600}
+              size="large"
+              onSuccess={handleGoogleSuccess}
+              onFailure={handleGoogleFailure}
+            />
+          </div>
           {error && (
             <p className="text-red-500 text-[12px] lg:text-[16px]">{error}</p>
           )}
           <p className="text-[12px] lg:text-[16px] xl:text-base font-normal">
-            Dont have an account?{" "}
+            Belum Punya Akun?{" "}
             <Link
               to="/register"
-              className="text-violet-950 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
+              className="text-green-950 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
             >
-              Sign Up
+              Daftar
             </Link>
           </p>
         </div>

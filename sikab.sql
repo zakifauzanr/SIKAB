@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2024 pada 18.02
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.4.27
+-- Generation Time: Jun 01, 2024 at 09:56 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `berita`
+-- Table structure for table `berita`
 --
 
 CREATE TABLE `berita` (
@@ -35,10 +35,10 @@ CREATE TABLE `berita` (
   `Deskripsi` text NOT NULL,
   `Waktu` date NOT NULL,
   `Gambar` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `berita`
+-- Dumping data for table `berita`
 --
 
 INSERT INTO `berita` (`ID_Berita`, `ID_Burung`, `ID_User`, `Judul`, `Deskripsi`, `Waktu`, `Gambar`) VALUES
@@ -53,7 +53,7 @@ INSERT INTO `berita` (`ID_Berita`, `ID_Burung`, `ID_User`, `Judul`, `Deskripsi`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `burung`
+-- Table structure for table `burung`
 --
 
 CREATE TABLE `burung` (
@@ -62,10 +62,10 @@ CREATE TABLE `burung` (
   `nama_Burung` varchar(50) NOT NULL,
   `gambar` varchar(50) NOT NULL,
   `deskripsi` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `burung`
+-- Dumping data for table `burung`
 --
 
 INSERT INTO `burung` (`ID_Burung`, `ID_Tempat`, `nama_Burung`, `gambar`, `deskripsi`) VALUES
@@ -85,17 +85,17 @@ INSERT INTO `burung` (`ID_Burung`, `ID_Tempat`, `nama_Burung`, `gambar`, `deskri
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `galeri`
+-- Table structure for table `galeri`
 --
 
 CREATE TABLE `galeri` (
   `ID_Galeri` int(11) NOT NULL,
   `ID_Burung` int(11) NOT NULL,
   `Gambar` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `galeri`
+-- Dumping data for table `galeri`
 --
 
 INSERT INTO `galeri` (`ID_Galeri`, `ID_Burung`, `Gambar`) VALUES
@@ -107,7 +107,7 @@ INSERT INTO `galeri` (`ID_Galeri`, `ID_Burung`, `Gambar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `habitat`
+-- Table structure for table `habitat`
 --
 
 CREATE TABLE `habitat` (
@@ -116,10 +116,10 @@ CREATE TABLE `habitat` (
   `lokasi` varchar(50) NOT NULL,
   `gambar` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `habitat`
+-- Dumping data for table `habitat`
 --
 
 INSERT INTO `habitat` (`ID_Tempat`, `nama_Tempat`, `lokasi`, `gambar`, `deskripsi`) VALUES
@@ -130,29 +130,31 @@ INSERT INTO `habitat` (`ID_Tempat`, `nama_Tempat`, `lokasi`, `gambar`, `deskrips
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `ID_User` int(11) NOT NULL,
-  `Username` varchar(50) NOT NULL,
+  `Email` varchar(250) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `name_Author` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID_User`, `Username`, `Password`, `name_Author`) VALUES
-(1, 'user', 'user', 'Unknown Author');
+INSERT INTO `user` (`ID_User`, `Email`, `Password`, `name_Author`) VALUES
+(1, 'user@gmail.com', 'user', 'Unknown Author'),
+(2, 'kyry@gmail.com', '$2b$10$k2vRzTIEejkJ4IWnLxQjxuvXD8ALoVVnEyV3u39GV0j', 'kyry'),
+(3, 'anugrah@gmail.com', '$2b$10$oXs8Q7u2MmXQCw/ch1/RBe2an6C6YrSv21jIPwsRsNV', 'anugrah');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `berita`
+-- Indexes for table `berita`
 --
 ALTER TABLE `berita`
   ADD PRIMARY KEY (`ID_Berita`),
@@ -160,84 +162,84 @@ ALTER TABLE `berita`
   ADD KEY `user` (`ID_User`);
 
 --
--- Indeks untuk tabel `burung`
+-- Indexes for table `burung`
 --
 ALTER TABLE `burung`
   ADD PRIMARY KEY (`ID_Burung`),
   ADD KEY `ID_Tempat` (`ID_Tempat`);
 
 --
--- Indeks untuk tabel `galeri`
+-- Indexes for table `galeri`
 --
 ALTER TABLE `galeri`
   ADD PRIMARY KEY (`ID_Galeri`),
   ADD KEY `burung` (`ID_Burung`);
 
 --
--- Indeks untuk tabel `habitat`
+-- Indexes for table `habitat`
 --
 ALTER TABLE `habitat`
   ADD PRIMARY KEY (`ID_Tempat`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID_User`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `berita`
+-- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
   MODIFY `ID_Berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `burung`
+-- AUTO_INCREMENT for table `burung`
 --
 ALTER TABLE `burung`
   MODIFY `ID_Burung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT untuk tabel `galeri`
+-- AUTO_INCREMENT for table `galeri`
 --
 ALTER TABLE `galeri`
   MODIFY `ID_Galeri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `habitat`
+-- AUTO_INCREMENT for table `habitat`
 --
 ALTER TABLE `habitat`
   MODIFY `ID_Tempat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `berita`
+-- Constraints for table `berita`
 --
 ALTER TABLE `berita`
   ADD CONSTRAINT `berita` FOREIGN KEY (`ID_Burung`) REFERENCES `burung` (`ID_Burung`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`);
 
 --
--- Ketidakleluasaan untuk tabel `burung`
+-- Constraints for table `burung`
 --
 ALTER TABLE `burung`
   ADD CONSTRAINT `burung_ibfk_1` FOREIGN KEY (`ID_Tempat`) REFERENCES `habitat` (`ID_Tempat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `galeri`
+-- Constraints for table `galeri`
 --
 ALTER TABLE `galeri`
   ADD CONSTRAINT `burung` FOREIGN KEY (`ID_Burung`) REFERENCES `burung` (`ID_Burung`) ON DELETE CASCADE ON UPDATE CASCADE;

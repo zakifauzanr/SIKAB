@@ -2,6 +2,8 @@ import { useState } from "react";
 import loginImage from "../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import sikab from "../assets/sikab2.png";
+import masuk from '../assets/login/Masuk.png';
 
 function Register() {
   const navigate = useNavigate();
@@ -64,15 +66,18 @@ function Register() {
   };
 
   return (
-    <div className="flex">
-      <div className="login h-screen w-[100vw] lg:w-[50vw] flex flex-col justify-center">
-        <div className="text-center text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
-          DAFTAR
+    <div className="flex pb-12">
+      <div className="login h-screen w-[100vw] lg:w-[50vw] flex flex-col justify-start py-5">
+        <Link to='/'>
+          <img className="w-24 ml-5" src={sikab} alt="" />
+        </Link>
+        <div className="flex pt-16 justify-center text-center text-violet-950 text-[30px] lg:text-[40px] xl:text-[62px] font-extrabold mb-4">
+          <img className="w-32" src={masuk} alt="" />
         </div>
         <p className="text-center text-[12px] lg:text-[16px] xl:text-base font-normal mb-3">
           Silahkan Masukan Data Diri Anda
         </p>
-        <div className="flex flex-col gap-4 lg:gap-8 xl:gap-8 items-center">
+        <div className="flex flex-col gap-4 items-center">
           <div className="w-[260px] lg:w-[480px] flex flex-col items-start">
             <label className="block text-[12px] lg:text-[16px] xl:text-base mb-2">Nama</label>
             <input
@@ -125,7 +130,7 @@ function Register() {
             Sudah Punya Akun?{" "}
             <Link
               to="/login"
-              className="text-violet-950 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
+              className="text-green-900 text-[12px] lg:text-[16px] xl:text-base font-normal underline leading-tight"
             >
               Masuk
             </Link>
