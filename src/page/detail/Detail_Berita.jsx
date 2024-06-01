@@ -14,14 +14,14 @@ function Detail_Berita(){
       }, []); 
     const [other,setOther]= useState([]);
     const getOther = async () => {
-        const response = await Axios.get("http://localhost:8000/api/berita");
+        const response = await Axios.get("https://s74p83tb-8000.asse.devtunnels.ms/api/berita");
         setOther(response.data);
         fetchUsers(response.data)
     };
     const [getKonten,setKonten]= useState([]);
     const [user,setUser]= useState([]);
     const getBerita = async () => {
-        const response = await Axios.get(`http://localhost:8000/api/detail_berita/${id}`);
+        const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/detail_berita/${id}`);
         setKonten(response.data);
         fetchUsers(response.data);
       };
@@ -30,7 +30,7 @@ function Detail_Berita(){
             const userIds = author.map(item => item.ID_User);
             const uniqueUserIds = Array.from(new Set(userIds));
             const promises = uniqueUserIds.map(async userId => {
-                const response = await Axios.get(`http://localhost:8000/api/user/${userId}`);
+                const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/user/${userId}`);
                 return { [userId]: response.data[0]?.name_Author || 'Unknown' };
             });
             const users = await Promise.all(promises);

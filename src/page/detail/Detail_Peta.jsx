@@ -15,11 +15,11 @@ function Detail_Peta(){
     const [peta,setpeta]= useState([]);
     const [lokasi,setlokasi]= useState([]);
     const getPeta = async () => {
-      const response = await Axios.get(`http://localhost:8000/api/detail_peta/${id}`);
+      const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/detail_peta/${id}`);
       setpeta(response.data);
     };
     const getLokasi = async () => {
-        const response = await Axios.get(`http://localhost:8000/api/peta_burung/${id}`);
+        const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/peta_burung/${id}`);
         setlokasi(response.data);
       };
     return(

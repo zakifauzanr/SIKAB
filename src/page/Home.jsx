@@ -20,7 +20,7 @@ function Home() {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/search/berita', {
+            const response = await axios.get('https://s74p83tb-8000.asse.devtunnels.ms/api/search/berita', {
                 params: {
                     keyword: searchTerm
                 }

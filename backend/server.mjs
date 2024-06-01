@@ -303,7 +303,7 @@ db.connect((err) => {
     if (err) throw err;
     console.log("Sukses terhubung");
     server.get("/", (req, res) => {
-        res.send("OK");
+        res.send("SIKAB KALTIM API READY!");
     });
 });
 

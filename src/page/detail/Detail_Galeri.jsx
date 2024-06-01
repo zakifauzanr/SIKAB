@@ -7,11 +7,11 @@ function Detail_Galeri(){
     const [getKonten,setKonten]= useState([]);
     const [galeri,setGaleri]= useState([]);
     const getGaleri = async () => {
-      const response = await Axios.get(`http://localhost:8000/api/galeri/${id}`);
+      const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/galeri/${id}`);
       setGaleri(response.data);
     };
     const getBurung = async () => {
-        const response = await Axios.get(`http://localhost:8000/api/detail_burung/${id}`);
+        const response = await Axios.get(`https://s74p83tb-8000.asse.devtunnels.ms/api/detail_burung/${id}`);
         setKonten(response.data);
       };
     useEffect(() => {
