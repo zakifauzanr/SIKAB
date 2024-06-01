@@ -5,6 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -61,7 +62,6 @@ server.post('/api/insert', upload.single('Gambar'), (req, res) => {
   })
 });
 
-
 server.get('/api/get', (req, res) => {
     const sqlSelect = "SELECT * FROM burung";
     db.query(sqlSelect, (err, result) => {
@@ -83,24 +83,56 @@ server.get('/api/berita', (req, res) => {
   });
 });
 
+server.get('/api/search', (req, res) => {
+  const searchKeyword = req.query.keyword;
+  if (!searchKeyword) {
+      return res.status(400).send({ error: 'Keyword is required' });
+  }
+  const sqlSelect = "SELECT * FROM berita WHERE Judul REGEXP ?";
+  db.query(sqlSelect, [searchKeyword], (err, result) => {
+      if (err) {
+          return res.status(500).send(err);
+      }
+      res.send(result);
+  });
+});
+
 server.post('/api/getAcc', (req, res) => {
-  const { username, password } = req.body;
-  const sqlSelect = "SELECT * FROM user WHERE Username = ? AND Password = ?";
-  db.query(sqlSelect, [username, password], (err, result) => {
+  const { email, password } = req.body;
+  const sqlSelect = "SELECT * FROM user WHERE Email = ?";
+  db.query(sqlSelect, [email], async (err, result) => {
     if (err) {
+      console.error('Server error:', err);
       res.status(500).send('Server error');
       return;
     }
 
     if (result.length > 0) {
       const user = result[0];
-      const token = jwt.sign({ username: user.Username }, 'sikab2024', { expiresIn: '1h' });
-      res.json({ token });
+
+      // Memeriksa kecocokan password
+      try {
+        const match = await bcrypt.compare(password, user.Password);
+
+        if (match) {
+          // Password cocok, buat token JWT
+          const token = jwt.sign({ email: user.Email }, 'sikab2024', { expiresIn: '1h' });
+          res.json({ token });
+        } else {
+          // Password tidak cocok
+          res.status(401).json({ message: 'Invalid email or password' });
+        }
+      } catch (error) {
+        console.error('Error comparing passwords:', error);
+        res.status(500).send('Server error');
+      }
     } else {
-      res.status(401).json({ message: 'Invalid username or password' });
+      // User tidak ditemukan
+      res.status(401).json({ message: 'Invalid email or password' });
     }
   });
 });
+
 
 server.get('/api/detail_burung/:ID_Burung', (req, res) => {
   const { ID_Burung } = req.params;
@@ -177,6 +209,27 @@ server.post('/api/auth', (req, res) => {
   };
   res.json(responseData);
 });
+
+server.post('/api/register', async (req, res) => {
+  const { email, password, nama } = req.body;
+
+  // Hash password
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+  const sqlInsert = 'INSERT INTO user (Email, Password, name_Author) VALUES (?, ?, ?)';
+  const values = [email, hashedPassword, nama];
+
+  db.query(sqlInsert, values, (err, result) => {
+    if (err) {
+      console.error('Error = ', err);
+      res.status(500).send('Gagal menyimpan data.');
+    } else {
+      res.status(201).json({ message: 'Registrasi berhasil' });
+    }
+  });
+});
+
 
 db.connect((err) => {
     if (err) throw err;
