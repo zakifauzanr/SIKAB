@@ -38,20 +38,10 @@ function Register() {
     }
 
     try {
-      // Cek apakah email sudah terdaftar
-      const checkEmailResponse = await axios.get(
-        // https://65632a51ee04015769a6dd6e.mockapi.io/user/users?email=${email}
-      );
-
-      if (checkEmailResponse.data.length > 0) {
-        setError("Email sudah terdaftar. Gunakan email lain atau coba Login.");
-        return;
-      }
-
       // Kirim data registrasi ke API
       const registerResponse = await axios.post(
-        "https://65632a51ee04015769a6dd6e.mockapi.io/user/users",
-        { email, password, nama, role: "pasien" } // Sesuaikan dengan kebutuhan
+        "http://localhost:8000/api/register",
+        { email, password, nama } // Sesuaikan dengan kebutuhan
       );
 
       // Handle respons dari API sesuai kebutuhan
@@ -149,6 +139,5 @@ function Register() {
     </div>
   );
 }
-
 
 export default Register;
