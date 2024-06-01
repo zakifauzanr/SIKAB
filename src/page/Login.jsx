@@ -88,7 +88,7 @@ function Login() {
         </p>
         <div className="flex flex-col gap-4 lg:gap-6 xl:gap-4 items-center">
           <input
-            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[66px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
+            className="w-[260px] h-[40px] lg:w-[408px] lg:h-[40px] rounded-[5px] border-[1px] border-stone-300 px-4 text-[12px] lg:text-[16px] xl:text-base"
             type="email"
             placeholder="Email"
             value={email}
