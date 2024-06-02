@@ -36,7 +36,7 @@ function Home() {
             <div className="h-full lg:h-screen">
                 <div className="relative container-home my-3 py-12 px-10 rounded-2xl bg-home flex justify-center items-center">
                     <div className='absolute left-0 bottom-0 z-0'>
-                        <img className='h-32 lg:h-80 md:h-60 w-full' src={bgHome} alt="" />
+                        <img className='h-32 lg:h-80 md:h-60 w-auto' src={bgHome} alt="" />
                     </div>
                     <div className='relative text-white z-10'>
                         <h1 className='text-xs lg:text-lg md:text-sm'>Mari Bergabung Melestarikan</h1>
