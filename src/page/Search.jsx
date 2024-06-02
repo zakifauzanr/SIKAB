@@ -10,12 +10,12 @@ function Search() {
       };
     return (
         <div className='my-12'>
-            <h1 className="text-5xl font-bold text-left">Search Results</h1>
+            <h1 className="text-4xl lg:text-5xl w-full lg:w-2/4 font-bold text-left">Search Results</h1>
             {results && results.length > 0 ? (
-                <div className="grid grid-cols-3 gap-8 my-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-8 my-12">
                     {results.map((item, index) => (
                              <div key={index} className={`flex flex-col justify-between ${
-                                results.length % 3 === 1 && index === results.length - 1 ? 'col-start-2' : ''
+                                results.length % 3 === 1 && index === results.length - 1 ? 'lg:col-start-2 md:col-start-2' : ''
                               }`}>
                              <div>
                                 {item.Gambar?(<>
