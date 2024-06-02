@@ -291,7 +291,7 @@ server.post('/api/register', async (req, res) => {
   db.query(sqlInsert, values, (err) => {
     if (err) {
       console.error('Error = ', err);
-      res.status(500).send('Gagal menyimpan data.');
+      res.status(500).send('Data Invalid.');
     } else {
       res.status(201).json({ message: 'Registrasi berhasil' });
     }

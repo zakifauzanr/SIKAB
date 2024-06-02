@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import sikab from "../assets/sikab2.png";
 import masuk from '../assets/login/Masuk.png';
+import Swal from "sweetalert2";
 
 function Register() {
   const navigate = useNavigate();
@@ -48,10 +49,15 @@ function Register() {
       console.log("Sign Up berhasil:", registerResponse.data);
 
       // Tambahkan logika navigasi atau tampilkan pesan sukses
-      navigate("/login");
+      navigate("/register");
     } catch (error) {
       console.error("Error registering user:", error);
       setError("Gagal melakukan registrasi. Silakan coba lagi.");
+      navigate("/register");
+        Swal.fire({
+          title: "Data Invalid",
+          icon: "error",
+        });
     }
   };
 
