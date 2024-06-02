@@ -13,19 +13,19 @@ function Header() {
 
   const logOut = () => {
     Swal.fire({
-      title: "Anda yakin untuk Log Out?",
+      title: "Anda yakin untuk Keluar?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Logout!",
+      confirmButtonText: "Ya, Keluar!",
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
         navigate("/");
         Swal.fire({
-          title: "Logout Berhasil",
+          title: "Keluar Berhasil",
           icon: "success",
         });
       }
