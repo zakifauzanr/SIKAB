@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 
 function Login() {
   const navigate = useNavigate();
@@ -34,6 +35,10 @@ function Login() {
 
       login(user);
       navigate("/");
+      Swal.fire({
+        title: "Selamat Datang",
+        icon: "success",
+      });
     } catch (error) {
       console.error("Error fetching user data:", error);
       setError("Terjadi kesalahan. Coba lagi.");
