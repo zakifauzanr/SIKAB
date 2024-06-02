@@ -63,7 +63,7 @@ function Header() {
           </svg>
         </div>
         <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 md:ml-5 lg:ml-5 mt-4 sm:mt-0 mb-3 lg:mb-0 ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
-          <div className='h-24 lg:h-full w-full inline-block mt-2 flex justify-around ml-5 lg:ml-0 px-0 lg:px-72 flex-col lg:flex-row'>
+          <div className='h-24 md:h-full lg:h-full w-full inline-block mt-2 flex justify-around px-0 lg:px-72 flex-col md:flex-row lg:flex-row'>
             <Link
               href='#'
               to="/katalog"
@@ -86,7 +86,7 @@ function Header() {
               Berita
             </Link>
           </div>
-          <div className='w-80 ml-5 lg:ml-0 flex flex-col sm:flex-row lg:justify-end justify-center items-left'>
+          <div className='w-full lg:w-80 flex flex-col lg:flex-row md:flex-row lg:justify-end md:justify-end justify-center items-left'>
             {isLoggedIn ? (
               <>
                 <button onClick={logOut} className='lg:ml-4 inline-block bg-red-800 text-white text-sm px-4 py-2 leading-none rounded border-transparent hover:border-gray-400'>Keluar</button>
