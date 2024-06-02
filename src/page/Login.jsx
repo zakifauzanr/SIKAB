@@ -52,9 +52,9 @@ function Login() {
       username: decoded.name,
       email: decoded.email,
     };
-
     const expirationTime = new Date(decoded.exp * 1000);
     localStorage.setItem("token", token);
+    localStorage.setItem("email", decoded.email);
     localStorage.setItem("expirationTime", expirationTime);
 
     login(user);
@@ -78,7 +78,7 @@ function Login() {
 
     checkTokenExpiration();
   }, []);
-
+  
   return (
     <div className="flex">
       <div className="login h-full w-[100vw] lg:w-[50vw] flex flex-col justify-start py-5">
@@ -121,7 +121,7 @@ function Login() {
             </button>
             <GoogleLogin
               shape="rectangular"
-              width={600}
+              width='auto'
               size="large"
               onSuccess={handleGoogleSuccess}
               onFailure={handleGoogleFailure}

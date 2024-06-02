@@ -24,7 +24,7 @@ function App() {
     <AuthProvider>
       <div>
         {!isLoginOrRegister && <Header />}
-        <div className={isLoginOrRegister ? '' : 'pt-20 mx-16'}>
+        <div className={isLoginOrRegister ? '' : 'pt-12 lg:pt-20 md:pt-20 mx-6 lg:mx-16'}>
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/*' element={<Navigate to='/'/>} />

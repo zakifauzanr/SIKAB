@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Items(){
     return(
-        <div className="h-56 grid grid-cols-3 gap-6 mb-12">
+        <div className="h-56 grid grid-cols-1 lg:grid:cols-3 md:grid-cols-3 gap-6 mb-12 mt-12 lg:mt-0">
             <div className='flex flex-col justify-between'>
                 <div className='flex justify-center'>
                     <img className='w-8' src={category} alt="" />

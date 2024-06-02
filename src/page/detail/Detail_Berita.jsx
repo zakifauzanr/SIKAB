@@ -11,7 +11,7 @@ function Detail_Berita(){
         getOther();
         window.scrollTo(0, 0);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []); 
+      }, [id]); 
     const [other,setOther]= useState([]);
     const getOther = async () => {
         const response = await Axios.get("https://s74p83tb-8000.asse.devtunnels.ms/api/berita");
@@ -53,7 +53,6 @@ function Detail_Berita(){
     const handleSubscription = async () => {
         try {
             const email = localStorage.getItem('email'); // Ambil email dari localStorage
-            console.log(email);
             if (!email) {
                 setSubscriptionMessage('Anda harus login terlebih dahulu.');
                 return;
@@ -92,12 +91,12 @@ function Detail_Berita(){
                             <h5 className="text-md font-bold">{formatDate(item.Waktu)}</h5>
                         </div>
                     </div>
-                    <div className="flex justify-between">
-                        <div className="text-left">
+                    <div className="flex flex-col lg:flex-row md:flex-row justify-between w-full">
+                        <div className="text-left w-full lg:w-3/4">
                             <h2 className="text-3xl font-bold font-serif">JURNAL FLORES | FLORA & FAUNA</h2>
-                            <p className="my-3">{item.Deskripsi}</p>
+                            <p className="my-3 text-justify">{item.Deskripsi}</p>
                         </div>
-                        <div className="p-7 m-12 border border-black border-md text-left">
+                        <div className="p-7 m-0 lg:m-12 md:m-10 border border-black border-md text-left w-full lg:w-96 md:w-72">
                             <h1 className="text-xl font-bold">Langganan Untuk Selalu Update</h1>
                             <p className="my-5">Berlangganan untuk menerima berita terbaru tentang kenaekaragaman hayati burung di kalimantan ke kotak masuk Anda setiap minggu.</p>
                             <button className="w-full bg-green-800 text-white py-1" onClick={handleSubscription}>Berlangganan</button>
@@ -106,17 +105,17 @@ function Detail_Berita(){
                     </div>
                     <div className="text-left my-12">
                         <h1 className="text-2xl font-bold">Berita Terait</h1>
-                        <h2 className="text-xl font-light">Mungkin anda juga tertarik untuk membaca :</h2>
-                        <div className="grid grid-cols-3 gap-6">
+                        <h2 className="text-xl font-light mb-3">Mungkin anda juga tertarik untuk membaca :</h2>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-6">
                         {other.filter((item_other)=> item_other.ID_Berita !== item.ID_Berita).slice(0,3).map((item_other,id)=>{
                             return(
                                 <div key={id} className="flex flex-col justify-between">
                                 <div className="flex flex-col justify-around">
                                     <img className="mr-12 w-96 h-96 object-cover" src={`/berita/${item_other.Gambar}`} alt="" />
-                                    <div>
+                                    <Link to={`/berita/detail/${item_other.ID_Berita}`}>
                                         <h2 className="text-2xl font-semibold text-left my-3">{item_other.Judul}</h2>
                                         <p className="text-justify">{item_other.Deskripsi}</p>
-                                    </div>
+                                    </Link>
                                 </div>
                                 <div className="flex justify-start mt-5">
                                     <div>

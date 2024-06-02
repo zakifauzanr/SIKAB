@@ -29,7 +29,7 @@ function Detail_Peta(){
                     <div className="text-left my-3">
                         <Link to='/peta'><FontAwesomeIcon icon={faAngleLeft}/> Semua Peta</Link>
                     </div>
-                    <div className="flex text-left justify-between my-12">
+                    <div className="flex flex-col lg:flex-row text-left justify-between my-12">
                         <div>
                             <h3 className="text-md font-semibold">{item.lokasi}</h3>
                             <h2 className="text-3xl font-bold mb-3">{item.nama_Tempat}</h2>
@@ -42,12 +42,12 @@ function Detail_Peta(){
                                 </ul>
                             </div>
                         </div>
-                        <img className="w-96 ml-40" src={`/peta/${item.gambar}`} alt="" />  
+                        <img className="w-96 ml-0 lg:ml-40 md:ml-32" src={`/peta/${item.gambar}`} alt="" />  
                     </div>
                     <div className="flex justify-center">
                         <iframe
                             src={item.map}
-                            className="map-container"
+                            className="h-[32vh] lg:h-[75vh] w-full"
                             allowFullScreen="true"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade">

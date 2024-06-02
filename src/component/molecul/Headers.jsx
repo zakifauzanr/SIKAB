@@ -22,6 +22,7 @@ function Header() {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
         navigate("/");
         Swal.fire({
           title: "Logout Berhasil",
@@ -32,8 +33,8 @@ function Header() {
   }
   return (
     <nav className="bg-white flex items-center sm:h-auto md:h-20 flex items-center fixed inset-x-0 z-50 border-b-4 border-black">
-      <div className="container mx-auto grid grid-cols-3 gap-auto lg:flex md:flex justify-between md:justify-evenly lg:items-center md:items-center px-4">
-        <Link to='/' className='w-40'>
+      <div className="container mx-auto grid grid-cols-2 gap-auto lg:flex md:flex justify-between md:justify-evenly lg:items-center md:items-center px-4">
+        <Link to='/' className='w-32 lg:w-40'>
         <img
             src={sikab}
             width="100"
@@ -61,31 +62,31 @@ function Header() {
             ></path>
           </svg>
         </div>
-        <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 md:ml-5 lg:ml-5 mt-4 sm:mt-0 lg:block ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
-          <div className='h-full w-full bg- inline-block mt-2 flex justify-around px-72'>
-          <Link
-            href='#'
-            to="/katalog"
-            className="block lg:inline-block text-black hover:text-gray-400"
-          >
-            Katalog
-          </Link>
-          <Link
-            href='#'
-            to="/peta"
-            className="block lg:inline-block text-black hover:text-gray-400"
-          >
-            Peta Burung
-          </Link>
-          <Link
-            href='#'
-            to="/berita"
-            className="block lg:inline-block text-black hover:text-gray-400"
-          >
-            Berita
-          </Link>
+        <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 md:ml-5 lg:ml-5 mt-4 sm:mt-0 mb-3 lg:mb-0 ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
+          <div className='h-24 lg:h-full w-full inline-block mt-2 flex justify-around ml-5 lg:ml-0 px-0 lg:px-72 flex-col lg:flex-row'>
+            <Link
+              href='#'
+              to="/katalog"
+              className="block lg:inline-block text-black hover:text-gray-400"
+            >
+              Katalog
+            </Link>
+            <Link
+              href='#'
+              to="/peta"
+              className="block lg:inline-block text-black hover:text-gray-400"
+            >
+              Peta Burung
+            </Link>
+            <Link
+              href='#'
+              to="/berita"
+              className="block lg:inline-block text-black hover:text-gray-400"
+            >
+              Berita
+            </Link>
           </div>
-          <div className='w-80 flex flex-col sm:flex-row lg:justify-end justify-center items-left'>
+          <div className='w-80 ml-5 lg:ml-0 flex flex-col sm:flex-row lg:justify-end justify-center items-left'>
             {isLoggedIn ? (
               <>
                 <button onClick={logOut} className='lg:ml-4 inline-block bg-red-800 text-white text-sm px-4 py-2 leading-none rounded border-transparent hover:border-gray-400'>Keluar</button>

@@ -40,13 +40,13 @@ function Berita(){
         return new Date(dateString).toLocaleDateString('id-ID', options);
       };
     return(
-        <div className="my-20 text-left">
-            <h1 className="text-5xl font-bold text-left">Tetap Terhubung dengan Kabar <br/>Terbaru tentang Burung Kalimantan!</h1>
+        <div className="my-5 lg:my-20 text-left">
+            <h1 className="text-4xl lg:text-5xl w-full lg:w-2/4 font-bold text-left">Tetap Terhubung dengan Kabar Terbaru tentang Burung Kalimantan!</h1>
             <h4 className="text-md font-light mt-3">Berita Terbaru tentang Keanekaragaman Hayati Burung di Kalimantan</h4>
             <article className="my-12">
                 {getKonten.slice(0,1).map((item,idx)=>{
                     return(
-                        <div key={idx} className="flex justify-between">
+                        <div key={idx} className="flex flex-col lg:flex-row md:flex-row justify-between">
                         <img className="mr-12" width={600} src={`/berita/${item.Gambar}`} alt="" />
                         <div className="flex flex-col justify-around">
                             <Link to={`/berita/detail/${item.ID_Berita}`}>
@@ -64,7 +64,7 @@ function Berita(){
                         </div>
                         </div>
                     )})}
-                <div className="grid grid-cols-3 gap-8 my-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-8 my-12">
                     {getKonten.slice(1).map((item,idx)=>(
                         <div key={idx} className="flex flex-col justify-between">
                             <div>
