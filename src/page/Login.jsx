@@ -59,6 +59,10 @@ function Login() {
 
     login(user);
     navigate("/");
+    Swal.fire({
+      title: "Selamat Datang",
+      icon: "success",
+    });
   };
 
   const handleGoogleFailure = (error) => {
