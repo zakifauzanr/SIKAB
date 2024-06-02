@@ -27,11 +27,11 @@ function Detail_Galeri(){
                     <h1 className="text-5xl font-bold font-serif my-5">{item.nama_Burung}</h1>
                     <p className="mx-72">{item.deskripsi}</p>
                     <div className="flex w-full h-full my-7">
-                        <img className="w-2/4 min-h-full mr-5" src={`/bird/${item.gambar}`} alt="" />
-                        <div className="grid grid-cols-2 gap-4 min-h-full">
+                        <img className="w-full min-h-full object-cover mr-5" src={`/bird/${item.gambar}`} alt="" />
+                        <div className="grid w-2/4 grid-cols-2 gap-4 min-h-full">
                             {galeri.map((item,idx)=>(
                                 <div key={idx}>
-                                    <img className="h-full" src={`/galery/${item.Gambar}`} alt="" />
+                                    <img className="h-full w-full object-cover" src={`/galery/${item.Gambar}`} alt="" />
                                 </div>
                             ))}
                         </div>

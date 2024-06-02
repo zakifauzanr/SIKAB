@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import sikab from '../../assets/sikab2.png';
 
 function FootersHead(){
@@ -7,10 +8,10 @@ function FootersHead(){
                 <img className='w-32' src={sikab} alt="" />
             </div>
             <div className='flex items-center justify-center my-5'>
-                <h1 className=''>Katalog</h1>
-                <h1 className='ml-3'>Peta Burung</h1>
-                <h1 className='ml-3'>Berita</h1>
-                <h1 className='ml-3'>Bagikan</h1>
+                <Link to='/katalog' className='font-base text-md'>Katalog</Link>
+                <Link to='/peta' className='font-base text-md ml-3'>Peta Burung</Link>
+                <Link to='/berita' className='font-base text-md ml-3'>Berita</Link>
+                <Link to='/#' className='font-base text-md ml-3'>Bagikan</Link>
             </div>
         </footer>
     )

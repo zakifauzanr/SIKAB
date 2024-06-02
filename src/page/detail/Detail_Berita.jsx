@@ -95,7 +95,7 @@ function Detail_Berita(){
                     <div className="flex justify-between">
                         <div className="text-left">
                             <h2 className="text-3xl font-bold font-serif">JURNAL FLORES | FLORA & FAUNA</h2>
-                            <p className="my-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident tenetur excepturi voluptate molestiae quis et, ad eius veritatis dolores facere saepe ullam est quos animi explicabo maiores id eligendi perspiciatis ea cumque! Similique, molestias dicta! Eaque, harum adipisci sed, non, tempore aliquid eius mollitia tempora atque quo nesciunt obcaecati totam.</p>
+                            <p className="my-3">{item.Deskripsi}</p>
                         </div>
                         <div className="p-7 m-12 border border-black border-md text-left">
                             <h1 className="text-xl font-bold">Langganan Untuk Selalu Update</h1>
