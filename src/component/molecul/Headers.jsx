@@ -33,7 +33,7 @@ function Header() {
   }
   return (
     <nav className="bg-white flex items-center sm:h-auto md:h-20 flex items-center fixed inset-x-0 z-50 border-b-4 border-black">
-      <div className="container mx-auto grid grid-cols-2 gap-auto lg:flex md:flex justify-between md:justify-evenly lg:items-center md:items-center px-4">
+      <div className="w-full mx-auto grid grid-cols-2 gap-auto lg:flex md:flex justify-between md:justify-evenly lg:items-center md:items-center px-4">
         <Link to='/' className='w-32 lg:w-40'>
         <img
             src={sikab}
@@ -62,7 +62,7 @@ function Header() {
             ></path>
           </svg>
         </div>
-        <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 md:ml-5 lg:ml-5 mt-4 sm:mt-0 mb-3 lg:mb-0 ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
+        <div className={`lg:flex md:flex lg:flex-grow md:flex-grow lg:space-x-6 md:space-x-8 ml-3 md:ml-5 lg:ml-12 mt-2 lg:mt-0 mb-3 lg:mb-0 ${isNav ? 'block w-screen pr-16 text-center' : 'hidden text-left'}`}>
           <div className='h-24 md:h-full lg:h-full w-full inline-block mt-2 flex justify-around px-0 lg:px-72 flex-col md:flex-row lg:flex-row'>
             <Link
               href='#'
