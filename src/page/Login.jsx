@@ -23,7 +23,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post("https://s74p83tb-8000.asse.devtunnels.ms/api/getAcc", { email, password });
+      const response = await axios.post("http://localhost:8000/api/getAcc", { email, password });
       const { token } = response.data;
       const decoded = jwtDecode(token);
       const user = { email: decoded.email };

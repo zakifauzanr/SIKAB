@@ -41,7 +41,7 @@ function Register() {
     try {
       // Kirim data registrasi ke API
       const registerResponse = await axios.post(
-        "https://s74p83tb-8000.asse.devtunnels.ms/api/register",
+        "http://localhost:8000/api/register",
         { email, password, nama } // Sesuaikan dengan kebutuhan
       );
 

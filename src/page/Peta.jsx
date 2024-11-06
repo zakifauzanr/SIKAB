@@ -10,7 +10,7 @@ function Peta(){
       }, []); 
     const [getKonten,setKonten]= useState([]);
     const getGaleri = async () => {
-        const response = await Axios.get("https://s74p83tb-8000.asse.devtunnels.ms/api/getPeta");
+        const response = await Axios.get("http://localhost:8000/api/getPeta");
         setKonten(response.data);
       };
       const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +22,7 @@ function Peta(){
   
       const handleSearch = async () => {
           try {
-              const response = await axios.get('https://s74p83tb-8000.asse.devtunnels.ms/api/search/tempat', {
+              const response = await axios.get('http://localhost:8000/api/search/tempat', {
                   params: {
                       keyword: searchTerm
                   }

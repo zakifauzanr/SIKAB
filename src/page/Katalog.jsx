@@ -18,7 +18,7 @@ function Katalog(){
   
       const handleSearch = async () => {
           try {
-              const response = await axios.get('https://s74p83tb-8000.asse.devtunnels.ms/api/search/burung', {
+              const response = await axios.get('http://localhost:8000/api/search/burung', {
                   params: {
                       keyword: searchTerm
                   }
@@ -30,7 +30,7 @@ function Katalog(){
       };
     const [getKonten,setKonten]= useState([]);
     const getGaleri = async () => {
-        const response = await Axios.get("https://s74p83tb-8000.asse.devtunnels.ms/api/get");
+        const response = await Axios.get("http://localhost:8000/api/get");
         setKonten(response.data);
       };
     return(
