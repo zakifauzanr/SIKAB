@@ -39,10 +39,10 @@ function Login() {
         title: "Selamat Datang",
         icon: "success",
       });
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      setError("Terjadi kesalahan. Coba lagi.");
-    }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setError("Terjadi kesalahan. Coba lagi.");
+      }
   };
 
   const handleGoogleSuccess = (response) => {

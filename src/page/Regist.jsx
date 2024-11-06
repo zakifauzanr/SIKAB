@@ -47,9 +47,13 @@ function Register() {
 
       // Handle respons dari API sesuai kebutuhan
       console.log("Sign Up berhasil:", registerResponse.data);
+      Swal.fire({
+        title: "Berhasil Mendaftar",
+        icon: "success",
+      });
 
       // Tambahkan logika navigasi atau tampilkan pesan sukses
-      navigate("/register");
+      navigate("/login");
     } catch (error) {
       console.error("Error registering user:", error);
       setError("Gagal melakukan registrasi. Silakan coba lagi.");
