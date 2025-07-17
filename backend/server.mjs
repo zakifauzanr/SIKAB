@@ -197,7 +197,7 @@ server.post('/api/getAcc', (req, res) => {
 
         if (match) {
           // Password cocok, buat token JWT
-          const token = jwt.sign({ email: user.Email }, 'sikab2024', { expiresIn: '1h' });
+          const token = jwt.sign({ email: user.Email }, 'INFORSA', { expiresIn: '1h' });
           res.json({ token });
         } else {
           // Password tidak cocok
